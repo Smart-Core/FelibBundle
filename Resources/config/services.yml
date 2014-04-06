@@ -4,4 +4,4 @@ parameters:
 services:
     smart.felib:
         class: SmartCore\Bundle\FelibBundle\Service\FelibService
-        arguments: [ @doctrine.orm.entity_manager, @service_container, @tagcache ]
+        arguments: [ %kernel.cache_dir%, @request_stack, @tagcache ]

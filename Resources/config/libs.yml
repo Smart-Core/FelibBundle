@@ -1,7 +1,7 @@
 bootstrap:
     version: 2.3.2
     deps: jquery
-    css: { css/bootstrap.min.css, css/bootstrap-responsive.min.css }
+    css: [css/bootstrap.min.css, css/bootstrap-responsive.min.css]
     js: js/bootstrap.min.js
 
 highlightjs:

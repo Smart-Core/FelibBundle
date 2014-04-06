@@ -2,10 +2,8 @@
 
 namespace SmartCore\Bundle\FelibBundle\Service;
 
-use Doctrine\ORM\EntityManager;
 use RickySu\Tagcache\Adapter\TagcacheAdapter;
-use SmartCore\Bundle\FelibBundle\Entity\Library;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class FelibService
 {
@@ -17,7 +15,7 @@ class FelibService
     /**
      * Список всех доступных скриптов.
      *
-     * @var Library[]
+     * @var array
      */
     protected $scripts;
 
@@ -34,45 +32,25 @@ class FelibService
     protected $globalAssets;
 
     /**
-     * @var \Doctrine\DBAL\Connection
-     */
-    protected $db;
-
-    /**
-     * @var EntityManager
-     */
-    protected $em;
-
-    /**
      * @var TagcacheAdapter
      */
     protected $tagcache;
 
     /**
-     * Constructor.
-     *
-     * @param EntityManager $em
-     * @param ContainerInterface $continer
+     * @param string $cacheDir
+     * @param RequestStack $requestStack
      * @param TagcacheAdapter $tagcache
      */
-    public function __construct(EntityManager $em, ContainerInterface $continer, TagcacheAdapter $tagcache)
+    public function __construct($cacheDir, RequestStack $requestStack, TagcacheAdapter $tagcache)
     {
-        $this->basePath     = $continer->get('request')->getBasePath() . '/';
+        $this->basePath     = $requestStack->getMasterRequest()->getBasePath() . '/';
         $this->globalAssets = $this->basePath . 'bundles/felib/';
-        $this->db           = $em->getConnection();
-        $this->em           = $em;
         $this->tagcache     = $tagcache;
+        $this->scripts      = unserialize(file_get_contents($cacheDir . '/smart_felib_libs.php.meta'));
 
-        $cache_key = md5('smart_felib_all_scripts');
-        if (false == $this->scripts = $tagcache->get($cache_key)) {
-            $this->scripts = [];
-
-            foreach ($em->getRepository('FelibBundle:Library')->findAll([], ['proirity' => 'DESC']) as $lib) {
-                $this->scripts[$lib->getName()] = $lib;
-            }
-
-            $tagcache->set($cache_key, $this->scripts, ['smart_felib']);
-        }
+        uasort($this->scripts, function($a, $b) {
+            return ($a['proirity'] <= $b['proirity']) ? +1 : -1;
+        });
     }
 
     /**
@@ -101,7 +79,7 @@ class FelibService
         }
 
         // Т.к. запрашивается в произвольном порядке - сначала надо сформировать массив с ключами в правильном порядке.
-        foreach ($this->scripts as $key => $value) {
+        foreach ($this->scripts as $key => $_dummy) {
             $output[$key] = false;
         }
 
@@ -111,35 +89,33 @@ class FelibService
             $flag = 0;
             foreach ($this->calledLibs as $name => $value) {
                 // @todo пока можно обработать зависимость только от одной либы, далее надо сделать списки, например "prototype, scriptaculous".
-                $related_by = isset($this->scripts[$name]) ? $this->scripts[$name]->getRelatedBy() : null;
+                $deps = isset($this->scripts[$name]) ? $this->scripts[$name]['deps'] : null;
 
-                if (!empty($related_by) and !isset($this->calledLibs[$related_by])) {
-                    $this->calledLibs[$related_by] = false;
+                if (!empty($deps) and !isset($this->calledLibs[$deps])) {
+                    $this->calledLibs[$deps] = false;
                     $flag = 1;
                 }
             }
         }
 
-        // @todo сделать возможность конфигурирования из файлов.
         foreach ($this->calledLibs as $name => $version) {
             if (!isset($this->scripts[$name])) {
                 continue;
             }
 
-            $pathEntity = $this->em->getRepository('FelibBundle:LibraryPath')->findOneBy([
-                'lib_id'  => $this->scripts[$name]->getId(),
-                'version' => empty($version) ? $this->scripts[$name]->getCurrentVersion() : $version,
-            ])->getPath();
+            $version = empty($version) ? $this->scripts[$name]['version'] : $version;
 
-            $path = strpos($pathEntity, 'http://') === 0 ? $pathEntity : $this->globalAssets . $pathEntity;
+            $path = $this->globalAssets . $name . '/' . $version . '/';
 
-            foreach (explode(',', $this->scripts[$name]->getFiles()) as $file) {
-                if (substr($file, strrpos($file, '.') + 1) === 'css') {
-                    $output[$name]['css'][] = $path . $file;
-                }
-
-                if (substr($file, strrpos($file, '.') + 1) === 'js') {
+            if (isset($this->scripts[$name]['js'])) {
+                foreach ($this->scripts[$name]['js'] as $file) {
                     $output[$name]['js'][] = $path . $file;
+                }
+            }
+
+            if (isset($this->scripts[$name]['css'])) {
+                foreach ($this->scripts[$name]['css'] as $file) {
+                    $output[$name]['css'][] = $path . $file;
                 }
             }
         }

@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": ">=5.3.3",
+        "rickysu/tagcache-bundle": "dev-master",
         "symfony/framework-bundle": ">=2.1"
     },                
     "autoload": {
