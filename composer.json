@@ -1,0 +1,16 @@
+{
+    "name": "smart-core/felib-bundle",
+    "description": "Font-End Library Managment Bundle",
+    "type": "symfony-bundle",
+    "homepage": "http://smart-core.org",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": ">=2.1"
+    },                
+    "autoload": {
+        "psr-0": {
+            "SmartCore\\Bundle\\SessionBundle": ""
+        }
+    },                
+    "target-dir": "SmartCore/Bundle/FelibBundle"
+}
