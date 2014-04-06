@@ -48,3 +48,7 @@ modernizr:
     profile:
         yandex:
             js: http://yandex.st/modernizr/
+
+syntaxhighlighter: # 3.0.83
+    css: styles/shCore.css
+    js: scripts/shCore.js
