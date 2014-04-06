@@ -1,4 +1,4 @@
 FelibBundle
 ===========
 
-Font-End Libruary Managment Bundle
+Font-End Library Managment Bundle
