@@ -3,6 +3,7 @@
     "description": "Font-End Library Managment Bundle",
     "type": "symfony-bundle",
     "homepage": "http://smart-core.org",
+    "license": "MIT",
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle": ">=2.1"
