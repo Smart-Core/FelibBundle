@@ -105,7 +105,11 @@ class FelibService
 
             $version = empty($version) ? $this->scripts[$name]['version'] : $version;
 
-            $path = $this->globalAssets . $name . '/' . $version . '/';
+            if (!empty($version)) {
+                $version = $version . '/';
+            }
+
+            $path = $this->globalAssets . $name . '/' . $version;
 
             if (isset($this->scripts[$name]['js'])) {
                 foreach ($this->scripts[$name]['js'] as $file) {
@@ -130,5 +134,56 @@ class FelibService
         $this->tagcache->set($cache_key, $output, ['smart_felib']);
 
         return $output;
+    }
+
+    /**
+     * @param string $name
+     * @param string $version
+     * @return array
+     */
+    public function getCss($name, $version = null)
+    {
+        return $this->getFiles('css', $name, $version);
+    }
+
+    /**
+     * @param string $name
+     * @param string $version
+     * @return array
+     */
+    public function getJs($name, $version = null)
+    {
+        return $this->getFiles('js', $name, $version);
+    }
+
+    /**
+     * @param string $type
+     * @param string $name
+     * @param string $version
+     * @return array
+     */
+    protected function getFiles($type, $name, $version = null)
+    {
+        $files = [];
+
+        if (empty($version)) {
+            if (isset($this->scripts[$name]['version']) and !empty($this->scripts[$name]['version'])) {
+                $version = $this->scripts[$name]['version'];
+            }
+        }
+
+        if (!empty($version)) {
+            $version = $version . '/';
+        }
+
+        $path = $this->globalAssets . $name . '/' . $version;
+
+        if (isset($this->scripts[$name][$type])) {
+            foreach ($this->scripts[$name][$type] as $file) {
+                $files[] = $path . $file;
+            }
+        }
+
+        return $files;
     }
 }
