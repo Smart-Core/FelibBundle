@@ -10,7 +10,7 @@
     },                
     "autoload": {
         "psr-0": {
-            "SmartCore\\Bundle\\SessionBundle": ""
+            "SmartCore\\Bundle\\FelibBundle": ""
         }
     },                
     "target-dir": "SmartCore/Bundle/FelibBundle"
