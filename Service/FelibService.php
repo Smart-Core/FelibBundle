@@ -43,7 +43,7 @@ class FelibService
      */
     public function __construct($cacheDir, RequestStack $requestStack, TagcacheAdapter $tagcache)
     {
-        $this->basePath     = $requestStack->getMasterRequest()->getBasePath() . '/';
+        $this->basePath     = $requestStack->getMasterRequest() ? $requestStack->getMasterRequest()->getBasePath() . '/' : '/';
         $this->globalAssets = $this->basePath . 'bundles/felib/';
         $this->tagcache     = $tagcache;
         $this->scripts      = unserialize(file_get_contents($cacheDir . '/smart_felib_libs.php.meta'));
