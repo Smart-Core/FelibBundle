@@ -8,8 +8,8 @@ bootstrap:
     js: js/bootstrap.min.js
 
 codemirror: # v4.0
-    css: codemirror.css
-    js: codemirror.js
+    css: lib/codemirror.css
+    js: lib/codemirror.js
 
 highlightjs:
     version: 8.0
@@ -39,7 +39,7 @@ jquery-cookie:
     js: jquery.cookie.js
 
 less:
-    version: 1.7.0
+    version: 1.7.3
     js: less.min.js
 
 modernizr:

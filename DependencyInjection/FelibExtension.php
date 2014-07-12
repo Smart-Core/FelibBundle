@@ -37,6 +37,10 @@ class FelibExtension extends Extension
                 $libs[$name]['deps'] = false;
             }
 
+            if (isset($lib['css']) and !is_array($lib['css'])) {
+                $libs[$name]['css'] = [$lib['css']];
+            }
+
             if (isset($lib['js']) and !is_array($lib['js'])) {
                 $libs[$name]['js'] = [$lib['js']];
             }

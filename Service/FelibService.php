@@ -56,12 +56,20 @@ class FelibService
     /**
      * Запрос библиотеки.
      *
-     * @param string $name
+     * @param array|string $data
      * @param string $version
      */
-    public function call($name, $version = false)
+    public function call($data, $version = false)
     {
-        $this->calledLibs[$name] = $version;
+        if (is_array($data)) {
+            foreach ($data as $name => $version) {
+                $this->calledLibs[$name] = $version;
+            }
+        } else {
+            $this->calledLibs[$data] = $version;
+        }
+
+        return $this;
     }
 
     /**
@@ -103,7 +111,9 @@ class FelibService
                 continue;
             }
 
-            $version = empty($version) ? $this->scripts[$name]['version'] : $version;
+            if (empty($version) and isset($this->scripts[$name]['version'])) {
+                $version = $this->scripts[$name]['version'];
+            }
 
             if (!empty($version)) {
                 $version = $version . '/';

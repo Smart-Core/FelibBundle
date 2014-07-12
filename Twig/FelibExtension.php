@@ -30,6 +30,7 @@ class FelibExtension extends \Twig_Extension
             'felib_css'  => new \Twig_Function_Method($this, 'getCss'),
             'felib_js'   => new \Twig_Function_Method($this, 'getJs'),
             'felib_use'  => new \Twig_Function_Method($this, 'call'),
+            'felib_get_all'  => new \Twig_Function_Method($this, 'getAll'),
         ];
     }
 
@@ -37,10 +38,19 @@ class FelibExtension extends \Twig_Extension
      * @param string $libName
      * @param string $version
      * @param string $media
+     * @return FelibService
      */
     public function call($libName, $version = null)
     {
-        $this->felib->call($libName, $version);
+        return $this->felib->call($libName, $version);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->felib->all();
     }
 
     /**
