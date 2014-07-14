@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
     mod(require("../lib/codemirror"));
@@ -20,10 +23,12 @@ CodeMirror.modeInfo = [
   {name: 'Clojure', mime: 'text/x-clojure', mode: 'clojure'},
   {name: 'CoffeeScript', mime: 'text/x-coffeescript', mode: 'coffeescript'},
   {name: 'Common Lisp', mime: 'text/x-common-lisp', mode: 'commonlisp'},
+  {name: 'Cypher', mime: 'application/x-cypher-query', mode: 'cypher'},
   {name: 'CSS', mime: 'text/css', mode: 'css'},
   {name: 'D', mime: 'text/x-d', mode: 'd'},
   {name: 'diff', mime: 'text/x-diff', mode: 'diff'},
   {name: 'DTD', mime: 'application/xml-dtd', mode: 'dtd'},
+  {name: 'Dylan', mime: 'text/x-dylan', mode: 'dylan'},
   {name: 'ECL', mime: 'text/x-ecl', mode: 'ecl'},
   {name: 'Eiffel', mime: 'text/x-eiffel', mode: 'eiffel'},
   {name: 'Erlang', mime: 'text/x-erlang', mode: 'erlang'},
@@ -88,6 +93,7 @@ CodeMirror.modeInfo = [
   {name: 'MariaDB', mime: 'text/x-mariadb', mode: 'sql'},
   {name: 'sTeX', mime: 'text/x-stex', mode: 'stex'},
   {name: 'LaTeX', mime: 'text/x-latex', mode: 'stex'},
+  {name: 'SystemVerilog', mime: 'text/x-systemverilog', mode: 'verilog'},
   {name: 'Tcl', mime: 'text/x-tcl', mode: 'tcl'},
   {name: 'TiddlyWiki ', mime: 'text/x-tiddlywiki', mode: 'tiddlywiki'},
   {name: 'Tiki wiki', mime: 'text/tiki', mode: 'tiki'},
