@@ -3,6 +3,7 @@
 namespace SmartCore\Bundle\FelibBundle\Twig;
 
 use SmartCore\Bundle\FelibBundle\Service\FelibService;
+use SmartCore\Bundle\FelibBundle\Twig\TokenParser\FelibTokenParser;
 
 class FelibExtension extends \Twig_Extension
 {
@@ -27,10 +28,23 @@ class FelibExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            'felib_css'  => new \Twig_Function_Method($this, 'getCss'),
-            'felib_js'   => new \Twig_Function_Method($this, 'getJs'),
-            'felib_use'  => new \Twig_Function_Method($this, 'call'),
-            'felib_get_all'  => new \Twig_Function_Method($this, 'getAll'),
+            'felib_css'     => new \Twig_Function_Method($this, 'getCss'),
+            'felib_js'      => new \Twig_Function_Method($this, 'getJs'),
+            'felib_use'     => new \Twig_Function_Method($this, 'call'),
+            'felib_get_all' => new \Twig_Function_Method($this, 'getAll'),
+        ];
+    }
+
+    /**
+     * Returns the token parser instance to add to the existing list.
+     *
+     * @return array An array of Twig_TokenParser instances
+     */
+    public function getTokenParsers()
+    {
+        return [
+            // {% felib 'jquery' %}
+            //new FelibTokenParser(),
         ];
     }
 
