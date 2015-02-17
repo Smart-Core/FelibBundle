@@ -23,9 +23,13 @@ highlightjs:
     profile:
         yandex:
             js: http://yandex.st/highlightjs/
+jcarousel:
+    deps: [jquery, modernizr]
+    css: jquery.jcarousel.css
+    js: jquery.jcarousel.min.js
 
 jquery:
-    version: 1.9.1
+    version: 2.1.3
     proirity: 1000
     js: jquery.min.js
     profile:
@@ -50,11 +54,18 @@ less:
     js: less.min.js
 
 modernizr:
-    version: 2.7.1
+    version: 2.8.3
     js: modernizr.min.js
     profile:
         yandex:
             js: http://yandex.st/modernizr/
+
+nivo-slider:
+    deps: jquery
+    js: jquery.nivo.slider.pack.js
+    css:
+        - nivo-slider.css
+        - themes/default/default.css
 
 syntaxhighlighter: # 3.0.83
     css:
@@ -73,3 +84,8 @@ syntaxhighlighter: # 3.0.83
         - scripts/shBrushTwig.js
         - scripts/shBrushXml.js
         - scripts/shBrushYaml.js
+
+tinymce:
+    version: 3
+    deps: jquery
+    js: jquery.tinymce.min.js

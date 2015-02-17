@@ -96,12 +96,19 @@ class FelibService
         while ($flag == 1) {
             $flag = 0;
             foreach ($this->calledLibs as $name => $value) {
-                // @todo пока можно обработать зависимость только от одной либы, далее надо сделать списки, например "prototype, scriptaculous".
                 $deps = isset($this->scripts[$name]) ? $this->scripts[$name]['deps'] : null;
-
-                if (!empty($deps) and !isset($this->calledLibs[$deps])) {
-                    $this->calledLibs[$deps] = false;
-                    $flag = 1;
+                if (is_array($deps)) {
+                    foreach ($deps as $dep) {
+                        if (!empty($dep) and !isset($this->calledLibs[$dep])) {
+                            $this->calledLibs[$dep] = false;
+                            $flag = 1;
+                        }
+                    }
+                } else {
+                    if (!empty($deps) and !isset($this->calledLibs[$deps])) {
+                        $this->calledLibs[$deps] = false;
+                        $flag = 1;
+                    }
                 }
             }
         }
