@@ -6,7 +6,7 @@ smart_core_felib:
     libs:
         tinymce: # новая библиотека
             deps: jquery
-            version: 3.5.10
+            version: 3
             js: tiny_mce.js
             path: 'assets/' # путь к библиотеки взамен дефолтного bundles/felib/, относительные пути будут дописаны после basePath.
         jquery:
