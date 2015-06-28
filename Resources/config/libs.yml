@@ -96,6 +96,19 @@ nivo-slider:
     css:
         - nivo-slider.css
         - themes/default/default.css
+select2:
+    version: 4
+    css: css/select2.min.css
+    js: js/select2.full.min.js
+    dev:
+        css: css/select2.css
+        js: [ js/select2.full.js, js/i18n/ru.js ]
+    versions:
+        3:
+            css: [ select2.css, select2-bootstrap.css ]
+            js: [ select2.min.js, select2_locale_ru.js ]
+            dev:
+                js: [ select2.js, select2_locale_ru.js ]
 
 syntaxhighlighter: # 3.0.83
     css:
