@@ -51,12 +51,12 @@ class FelibExtension extends \Twig_Extension
     /**
      * @param string $libName
      * @param string $version
-     * @param string $media
+     * @param array  $files
      * @return FelibService
      */
-    public function call($libName, $version = null)
+    public function call($libName, $version = null, array $files = [])
     {
-        return $this->felib->call($libName, $version);
+        return $this->felib->call($libName, $version, $files);
     }
 
     /**

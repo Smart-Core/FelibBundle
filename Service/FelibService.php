@@ -58,8 +58,9 @@ class FelibService
      *
      * @param array|string $data
      * @param string $version
+     * @param array  $files
      */
-    public function call($data, $version = false)
+    public function call($data, $version = false, array $files = [])
     {
         if (is_array($data)) {
             foreach ($data as $name => $version) {
