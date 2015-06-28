@@ -28,6 +28,15 @@ font-awesome:
         bootstrapcdn:
             css: //maxcdn.bootstrapcdn.com/font-awesome/
 
+ionicons:
+    version: 2.0.1
+    css: css/ionicons.min.css
+    dev:
+        css: css/ionicons.css
+    profile:
+        ionicframework:
+            css: //code.ionicframework.com/ionicons/
+
 #highlightjs: @todo
 #    version: 8.0
 #    css:
