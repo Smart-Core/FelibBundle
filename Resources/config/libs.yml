@@ -19,6 +19,15 @@ codemirror: # v4.0
     css: lib/codemirror.css
     js: lib/codemirror.js
 
+font-awesome:
+    version: 4.3.0
+    css: css/font-awesome.min.css
+    dev:
+        css: css/font-awesome.css
+    profile:
+        bootstrapcdn:
+            css: //maxcdn.bootstrapcdn.com/font-awesome/
+
 #highlightjs: @todo
 #    version: 8.0
 #    css:
