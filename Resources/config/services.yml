@@ -1,10 +1,7 @@
-parameters:
-#    smart_core_felib.example.class: SmartCore\Bundle\FelibBundle\Example
-
 services:
     smart.felib:
         class: SmartCore\Bundle\FelibBundle\Service\FelibService
-        arguments: [ %kernel.cache_dir%, @request_stack, @tagcache ]
+        arguments: [ %kernel.cache_dir%, @request_stack, @tagcache, %kernel.debug% ]
 
     smart.felib.twig.extension:
         class: SmartCore\Bundle\FelibBundle\Twig\FelibExtension

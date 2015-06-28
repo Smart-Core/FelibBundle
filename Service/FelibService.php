@@ -13,6 +13,11 @@ class FelibService
     protected $basePath;
 
     /**
+     * @var string
+     */
+    protected $isDebug;
+
+    /**
      * Список всех доступных скриптов.
      *
      * @var array
@@ -37,14 +42,16 @@ class FelibService
     protected $tagcache;
 
     /**
-     * @param string $cacheDir
-     * @param RequestStack $requestStack
+     * @param string          $cacheDir
+     * @param RequestStack    $requestStack
      * @param TagcacheAdapter $tagcache
+     * @param bool            $isDebug
      */
-    public function __construct($cacheDir, RequestStack $requestStack, TagcacheAdapter $tagcache)
+    public function __construct($cacheDir, RequestStack $requestStack, TagcacheAdapter $tagcache, $isDebug = false)
     {
         $this->basePath     = $requestStack->getMasterRequest() ? $requestStack->getMasterRequest()->getBasePath() . '/' : '/';
         $this->globalAssets = $this->basePath . 'bundles/felib/';
+        $this->isDebug      = $isDebug;
         $this->tagcache     = $tagcache;
         $this->scripts      = unserialize(file_get_contents($cacheDir . '/smart_felib_libs.php.meta'));
 
@@ -57,17 +64,23 @@ class FelibService
      * Запрос библиотеки.
      *
      * @param array|string $data
-     * @param string $version
-     * @param array  $files
+     * @param string       $version
+     * @param array        $files - перегрузка файлов ресурсов указанных по умолчанию.
      */
     public function call($data, $version = false, array $files = [])
     {
         if (is_array($data)) {
             foreach ($data as $name => $version) {
-                $this->calledLibs[$name] = $version;
+                $this->calledLibs[$name] = [
+                    'version' => $version,
+                    'files'   => $files,
+                ];
             }
         } else {
-            $this->calledLibs[$data] = $version;
+            $this->calledLibs[$data] = [
+                'version' => $version,
+                'files'   => $files,
+            ];
         }
 
         return $this;
@@ -101,20 +114,30 @@ class FelibService
                 if (is_array($deps)) {
                     foreach ($deps as $dep) {
                         if (!empty($dep) and !isset($this->calledLibs[$dep])) {
-                            $this->calledLibs[$dep] = false;
+                            $this->calledLibs[$dep] = [
+                                'version' => false,
+                                'files'   => [],
+                            ];
+
                             $flag = 1;
                         }
                     }
                 } else {
                     if (!empty($deps) and !isset($this->calledLibs[$deps])) {
-                        $this->calledLibs[$deps] = false;
+                        $this->calledLibs[$deps] = [
+                            'version' => false,
+                            'files'   => [],
+                        ];
+
                         $flag = 1;
                     }
                 }
             }
         }
 
-        foreach ($this->calledLibs as $name => $version) {
+        foreach ($this->calledLibs as $name => $data) {
+            $version = $data['version'];
+
             if (!isset($this->scripts[$name])) {
                 continue;
             }
@@ -123,22 +146,62 @@ class FelibService
                 $version = $this->scripts[$name]['version'];
             }
 
+            $path = $this->globalAssets . $name . '/';
+
             if (!empty($version)) {
-                $version = $version . '/';
+                $path .= $version . '/';
             }
 
-            $path = $this->globalAssets . $name . '/' . $version;
+            // JS
+            $jsFiles = [];
+            if ($this->isDebug) {
+                if (isset($this->scripts[$name]['versions'][$version]['dev']['js'])) {
+                    $jsFiles = $this->scripts[$name]['versions'][$version]['dev']['js'];
+                } elseif (isset($this->scripts[$name]['dev']['js'])) {
+                    $jsFiles = $this->scripts[$name]['dev']['js'];
+                } elseif (isset($this->scripts[$name]['js'])) {
+                    $jsFiles = $this->scripts[$name]['js'];
+                }
+            } else {
+                if (isset($this->scripts[$name]['versions'][$version]['js'])) {
+                    $jsFiles = $this->scripts[$name]['versions'][$version]['js'];
+                } elseif (isset($this->scripts[$name]['js'])) {
+                    $jsFiles = $this->scripts[$name]['js'];
+                }
+            }
 
-            if (isset($this->scripts[$name]['js'])) {
-                foreach ($this->scripts[$name]['js'] as $file) {
+            if (is_array($jsFiles)) {
+                foreach ($jsFiles as $file) {
                     $output[$name]['js'][] = $path . $file;
                 }
+            } elseif (!empty($jsFiles)) {
+                $output[$name]['js'][] = $path . $jsFiles;
             }
 
-            if (isset($this->scripts[$name]['css'])) {
-                foreach ($this->scripts[$name]['css'] as $file) {
+            // CSS
+            $cssFiles = [];
+            if ($this->isDebug) {
+                if (isset($this->scripts[$name]['versions'][$version]['dev']['css'])) {
+                    $cssFiles = $this->scripts[$name]['versions'][$version]['dev']['css'];
+                } elseif (isset($this->scripts[$name]['dev']['css'])) {
+                    $cssFiles = $this->scripts[$name]['dev']['css'];
+                } elseif (isset($this->scripts[$name]['css'])) {
+                    $cssFiles = $this->scripts[$name]['css'];
+                }
+            } else {
+                if (isset($this->scripts[$name]['versions'][$version]['css'])) {
+                    $cssFiles = $this->scripts[$name]['versions'][$version]['css'];
+                } elseif (isset($this->scripts[$name]['css'])) {
+                    $cssFiles = $this->scripts[$name]['css'];
+                }
+            }
+
+            if (is_array($cssFiles)) {
+                foreach ($cssFiles as $file) {
                     $output[$name]['css'][] = $path . $file;
                 }
+            } elseif (!empty($cssFiles)) {
+                $output[$name]['css'][] = $path . $cssFiles;
             }
         }
 

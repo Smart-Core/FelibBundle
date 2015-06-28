@@ -2,36 +2,46 @@ ace: # v1.1.3
     js: ace.js
 
 bootstrap:
-    version: 2
+    version: 3
     deps: jquery
-    css: [css/bootstrap.min.css]
-    #css: [css/bootstrap.min.css, css/bootstrap-responsive.min.css]
+    css: css/bootstrap.min.css
     js: js/bootstrap.min.js
+    dev:
+        css: css/bootstrap.css
+        js: js/bootstrap.js
+    versions:
+        2:
+            css: [css/bootstrap.min.css, css/bootstrap-responsive.min.css]
+            dev:
+                css: [css/bootstrap.css, css/bootstrap-responsive.css]
 
 codemirror: # v4.0
     css: lib/codemirror.css
     js: lib/codemirror.js
 
-highlightjs:
-    version: 8.0
-    css:
-        - styles/github.min.css
-        - styles/vs.min.css
-    js:
-        - highlight.min.js
-        - languages/php.min.js
-    profile:
-        yandex:
-            js: http://yandex.st/highlightjs/
+#highlightjs: @todo
+#    version: 8.0
+#    css:
+#        - styles/github.min.css
+#        - styles/vs.min.css
+#    js:
+#        - highlight.min.js
+#        - languages/php.min.js
+#    profile:
+#        yandex:
+#            js: http://yandex.st/highlightjs/
+
 jcarousel:
     deps: [jquery, modernizr]
     css: jquery.jcarousel.css
     js: jquery.jcarousel.min.js
 
 jquery:
-    version: 2.1.3
+    version: 2.1.4
     proirity: 1000
     js: jquery.min.js
+    dev:
+        js: jquery.js
     profile:
         google:
             js: //ajax.googleapis.com/ajax/libs/jquery/
@@ -43,6 +53,8 @@ jquery-colorbox:
     version: 1.5.10
     css: example1/colorbox.css
     js: jquery.colorbox-min.js
+    dev:
+        js: jquery.colorbox.js
 
 jquery-cookie:
     deps: jquery
@@ -50,7 +62,7 @@ jquery-cookie:
     js: jquery.cookie.js
 
 less:
-    version: 1.7.3
+    version: 2.5.1
     js: less.min.js
 
 modernizr:
@@ -86,6 +98,8 @@ syntaxhighlighter: # 3.0.83
         - scripts/shBrushYaml.js
 
 tinymce:
-    version: 3
+    version: 4
     deps: jquery
     js: jquery.tinymce.min.js
+
+#uploadify: # @todo
