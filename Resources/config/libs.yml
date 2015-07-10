@@ -1,6 +1,12 @@
 ace: # v1.1.3
     js: ace.js
 
+angular:
+    version: 1.4
+    js: angular.min.js
+    dev:
+        js: angular.js
+
 bootstrap:
     version: 3
     deps: jquery
