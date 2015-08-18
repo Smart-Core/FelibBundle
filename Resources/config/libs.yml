@@ -85,6 +85,11 @@ jquery-cookie:
     version: 1.3.1
     js: jquery.cookie.js
 
+# https://github.com/kswedberg/jquery-smooth-scroll
+jquery-smooth-scroll:
+    deps: jquery
+    js: jquery.smooth-scroll.js
+
 less:
     version: 2.5.1
     js: less.min.js
