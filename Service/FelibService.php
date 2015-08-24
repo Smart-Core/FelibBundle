@@ -137,6 +137,7 @@ class FelibService
 
         foreach ($this->calledLibs as $name => $data) {
             $version = $data['version'];
+            $versionCode = isset($this->scripts[$name]['version_code']) ? '?v='.$this->scripts[$name]['version_code'] : '';
 
             if (!isset($this->scripts[$name])) {
                 continue;
@@ -172,10 +173,10 @@ class FelibService
 
             if (is_array($jsFiles)) {
                 foreach ($jsFiles as $file) {
-                    $output[$name]['js'][] = $path . $file;
+                    $output[$name]['js'][] = $path . $file . $versionCode;
                 }
             } elseif (!empty($jsFiles)) {
-                $output[$name]['js'][] = $path . $jsFiles;
+                $output[$name]['js'][] = $path . $jsFiles . $versionCode;
             }
 
             // CSS
@@ -198,10 +199,10 @@ class FelibService
 
             if (is_array($cssFiles)) {
                 foreach ($cssFiles as $file) {
-                    $output[$name]['css'][] = $path . $file;
+                    $output[$name]['css'][] = $path . $file . $versionCode;
                 }
             } elseif (!empty($cssFiles)) {
-                $output[$name]['css'][] = $path . $cssFiles;
+                $output[$name]['css'][] = $path . $cssFiles . $versionCode;
             }
         }
 
