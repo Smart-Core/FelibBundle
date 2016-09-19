@@ -26,7 +26,7 @@ class FelibExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $libs = Yaml::parse(__DIR__.'/../Resources/config/libs.yml');
+        $libs = Yaml::parse(file_get_contents(__DIR__.'/../Resources/config/libs.yml'));
 
         foreach ($libs as $name => $lib) {
             if (!isset($lib['proirity'])) {

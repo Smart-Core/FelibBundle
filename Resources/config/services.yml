@@ -1,10 +1,10 @@
 services:
     smart.felib:
         class: SmartCore\Bundle\FelibBundle\Service\FelibService
-        arguments: [ %kernel.cache_dir%, @request_stack, @tagcache, %kernel.debug% ]
+        arguments: [ "%kernel.cache_dir%", "@request_stack", "@tagcache", "%kernel.debug%" ]
 
     smart.felib.twig.extension:
         class: SmartCore\Bundle\FelibBundle\Twig\FelibExtension
-        arguments: [ @smart.felib ]
+        arguments: [ "@smart.felib" ]
         tags:
             - { name: twig.extension }
