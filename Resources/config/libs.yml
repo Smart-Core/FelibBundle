@@ -28,7 +28,7 @@ codemirror: # v4.0
 
 font-awesome:
     version: 4
-    version_code: 4.4.0
+    version_code: 4.6.3
     css: css/font-awesome.min.css
     dev:
         css: css/font-awesome.css
