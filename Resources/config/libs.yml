@@ -22,7 +22,8 @@ bootstrap:
             dev:
                 css: [css/bootstrap.css, css/bootstrap-responsive.css]
 
-codemirror: # v4.0
+codemirror:
+    version_code: 5.19.0
     css: lib/codemirror.css
     js: lib/codemirror.js
 
