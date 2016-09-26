@@ -37,6 +37,9 @@ font-awesome:
         bootstrapcdn:
             css: //maxcdn.bootstrapcdn.com/font-awesome/
 
+iefix:
+    js: [ html5shiv.min.js, respond.min.js ]
+
 ionicons:
     version: 2.0.1
     css: css/ionicons.min.css
