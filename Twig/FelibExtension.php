@@ -7,9 +7,7 @@ use SmartCore\Bundle\FelibBundle\Twig\TokenParser\FelibTokenParser;
 
 class FelibExtension extends \Twig_Extension
 {
-    /**
-     * @var FelibService
-     */
+    /** @var FelibService */
     protected $felib;
 
     /**
@@ -28,10 +26,10 @@ class FelibExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            'felib_css'     => new \Twig_Function_Method($this, 'getCss'),
-            'felib_js'      => new \Twig_Function_Method($this, 'getJs'),
-            'felib_use'     => new \Twig_Function_Method($this, 'call'),
-            'felib_get_all' => new \Twig_Function_Method($this, 'getAll'),
+            new \Twig_SimpleFunction('felib_css',  [$this, 'getCss']),
+            new \Twig_SimpleFunction('felib_js',  [$this, 'getJs']),
+            new \Twig_SimpleFunction('felib_use',  [$this, 'call']),
+            new \Twig_SimpleFunction('felib_get_all',  [$this, 'getAll']),
         ];
     }
 
