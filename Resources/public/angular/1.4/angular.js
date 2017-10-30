@@ -79,7 +79,7 @@ function minErr(module, ErrorConstructor) {
   push: true,
   toString: true,
   ngMinErr: true,
-  angularModule: true,
+  angularModuleBundle: true,
   uid: true,
   REGEX_STRING_REGEXP: true,
   VALIDITY_STATE_PROPERTY: true,
@@ -2241,7 +2241,7 @@ function toDebugString(obj) {
   return obj;
 }
 
-/* global angularModule: true,
+/* global angularModuleBundle: true,
   version: true,
 
   $LocaleProvider,

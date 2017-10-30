@@ -1073,7 +1073,7 @@ QUnit.load = function() {
 			"' title='" + escapeText( val.tooltip ) + "'>" + val.label + "</label>";
 	}
 
-	moduleFilterHtml += "<label for='qunit-modulefilter'>Module: </label><select id='qunit-modulefilter' name='modulefilter'><option value='' " +
+	moduleFilterHtml += "<label for='qunit-modulefilter'>ModuleBundle: </label><select id='qunit-modulefilter' name='modulefilter'><option value='' " +
 		( config.module === undefined  ? "selected='selected'" : "" ) +
 		">< All Modules ></option>";
 
