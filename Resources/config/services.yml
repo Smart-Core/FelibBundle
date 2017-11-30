@@ -1,7 +1,7 @@
 services:
     smart.felib:
         class: SmartCore\Bundle\FelibBundle\Service\FelibService
-        arguments: [ "%kernel.cache_dir%", "@request_stack", "@doctrine_cache.providers.doctrine.orm.default_metadata_cache", "%kernel.debug%" ]
+        arguments: [ "%kernel.cache_dir%", "@request_stack", "@cache.provider.smart_felib", "%kernel.debug%" ]
 
     smart.felib.twig.extension:
         class: SmartCore\Bundle\FelibBundle\Twig\FelibExtension
