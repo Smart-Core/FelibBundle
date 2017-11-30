@@ -2,7 +2,7 @@
 
 namespace SmartCore\Bundle\FelibBundle\Service;
 
-use RickySu\Tagcache\Adapter\TagcacheAdapter;
+use Cache\TagInterop\TaggableCacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class FelibService
@@ -37,22 +37,22 @@ class FelibService
     protected $globalAssets;
 
     /**
-     * @var TagcacheAdapter
+     * @var TaggableCacheItemPoolInterface
      */
-    protected $tagcache;
+    protected $cache;
 
     /**
      * @param string          $cacheDir
      * @param RequestStack    $requestStack
-     * @param TagcacheAdapter $tagcache
+     * @param TaggableCacheItemPoolInterface $cache
      * @param bool            $isDebug
      */
-    public function __construct($cacheDir, RequestStack $requestStack, TagcacheAdapter $tagcache, $isDebug = false)
+    public function __construct($cacheDir, RequestStack $requestStack, TaggableCacheItemPoolInterface $cache, $isDebug = false)
     {
         $this->basePath     = $requestStack->getMasterRequest() ? $requestStack->getMasterRequest()->getBasePath() . '/' : '/';
         $this->globalAssets = $this->basePath . 'bundles/felib/';
         $this->isDebug      = $isDebug;
-        $this->tagcache     = $tagcache;
+        $this->cache        = $cache;
         $this->scripts      = unserialize(file_get_contents($cacheDir . '/smart_felib_libs.php.meta'));
 
         uasort($this->scripts, function($a, $b) {
@@ -94,7 +94,8 @@ class FelibService
     public function all()
     {
         $cache_key = md5('smart_felib_called_libs' . serialize($this->calledLibs) . $this->basePath);
-        if (false == $output = $this->tagcache->get($cache_key)) {
+
+        if (null == $output = $this->cache->getItem($cache_key)->get()) {
             $output = [];
         } else {
             return $output;
@@ -213,7 +214,9 @@ class FelibService
             }
         }
 
-        $this->tagcache->set($cache_key, $output, ['smart_felib']);
+        $item = $this->cache->getItem($cache_key);
+        $item->set($output)->setTags(['smart_felib']);
+        $this->cache->save($item);
 
         return $output;
     }
