@@ -48,6 +48,11 @@ bootstrap-slider:
     css: slider.css
     js: bootstrap-slider.js
 
+bootstrap-timepicker:
+    deps: bootstrap
+    css: css/timepicker.less
+    js: js/bootstrap-timepicker.js
+
 codemirror:
     version_code: 5.19.0
     css: lib/codemirror.css
