@@ -139,6 +139,10 @@ moment:
     dev:
         js: moment.min.js
 
+morris.js:
+    css: morris.css
+    js: morris.min.js
+
 nivo-slider:
     deps: jquery
     js: jquery.nivo.slider.pack.js
