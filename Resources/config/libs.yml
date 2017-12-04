@@ -122,6 +122,11 @@ jquery-smooth-scroll:
     deps: jquery
     js: jquery.smooth-scroll.js
 
+jquery-ui:
+    deps: jquery
+    version_code: 1.11.4
+    js: jquery-ui.min.js
+
 jvectormap:
     deps: jquery
     css: jquery-jvectormap.css
