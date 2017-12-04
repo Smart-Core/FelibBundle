@@ -224,7 +224,7 @@ syntaxhighlighter: # 3.0.83
 
 tinymce:
     version: 4
-    version_code: 4.4.3
+    version_code: 4.7.3
     deps: jquery
     js: jquery.tinymce.min.js
 
