@@ -22,6 +22,14 @@ bootstrap:
             dev:
                 css: [css/bootstrap.css, css/bootstrap-responsive.css]
 
+bootstrap-colorpicker:
+    deps: bootstrap
+    css: css/bootstrap-colorpicker.min.css
+    js: js/bootstrap-colorpicker.min.js
+    dev:
+        css: css/bootstrap-colorpicker.css
+        js: js/bootstrap-colorpicker.js
+
 bootstrap-datepicker:
     css: css/bootstrap-datepicker.min.css
     js: [ js/bootstrap-datepicker.min.js, bootstrap-datepicker.ru.min.js ]
