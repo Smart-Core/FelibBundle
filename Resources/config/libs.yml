@@ -75,7 +75,7 @@ jcarousel:
     js: jquery.jcarousel.min.js
 
 jquery:
-    version: 2.1.4
+    version: 3.2.1
     proirity: 1000
     js: jquery.min.js
     dev:
