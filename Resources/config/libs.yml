@@ -53,6 +53,9 @@ codemirror:
     css: lib/codemirror.css
     js: lib/codemirror.js
 
+eve-raphael:
+    js: eve.js
+
 font-awesome:
     version: 4
     version_code: 4.7.0
@@ -176,6 +179,7 @@ nivo-slider:
         - themes/default/default.css
 
 raphael:
+    deps: eve-raphael
     js: raphael.min.js
 
 select2:
