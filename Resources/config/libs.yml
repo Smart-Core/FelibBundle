@@ -31,7 +31,7 @@ bootstrap-datepicker:
         js: js/bootstrap-datepicker.js
 
 bootstrap-daterangepicker:
-    deps: [ bootstrap, moment.js, ]
+    deps: [ bootstrap, moment, ]
     css: daterangepicker.css
     jS: daterangepicker.js
 
@@ -125,9 +125,11 @@ modernizr:
         yandex:
             js: http://yandex.st/modernizr/
 
-moment.js:
+moment:
     version_code: 2.19.3
     js: moment.js
+    dev:
+        js: moment.min.js
 
 nivo-slider:
     deps: jquery
