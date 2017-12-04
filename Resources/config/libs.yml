@@ -122,6 +122,11 @@ jquery-smooth-scroll:
     deps: jquery
     js: jquery.smooth-scroll.js
 
+jvectormap:
+    deps: jquery
+    css: jquery-jvectormap.css
+    js: jquery-jvectormap.js
+
 less:
     version: 2.5.1
     js: less.min.js
