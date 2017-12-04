@@ -122,6 +122,11 @@ jquery-smooth-scroll:
     deps: jquery
     js: jquery.smooth-scroll.js
 
+jquery-sparkline:
+    deps: jquery
+    version_code: 2.1.3
+    js: jquery.sparkline.min.js
+
 jquery-ui:
     deps: jquery
     version_code: 1.11.4
