@@ -186,6 +186,11 @@ nivo-slider:
         - nivo-slider.css
         - themes/default/default.css
 
+pnotify:
+    deps: jquery
+    css: [ css/pnotify.css, css/pnotify.brighttheme.css ]
+    js: js/pnotify.js
+
 raphael:
     deps: eve-raphael
     js: raphael.min.js
