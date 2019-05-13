@@ -4,8 +4,9 @@ namespace SmartCore\Bundle\FelibBundle\Twig;
 
 use SmartCore\Bundle\FelibBundle\Service\FelibService;
 use SmartCore\Bundle\FelibBundle\Twig\TokenParser\FelibTokenParser;
+use Twig\Extension\AbstractExtension;
 
-class FelibExtension extends \Twig_Extension
+class FelibExtension extends AbstractExtension
 {
     /** @var FelibService */
     protected $felib;
