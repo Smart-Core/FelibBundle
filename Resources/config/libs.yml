@@ -35,7 +35,7 @@ bootstrap-datepicker:
     js: [ js/bootstrap-datepicker.min.js, bootstrap-datepicker.ru.min.js ]
     deps: bootstrap
     dev:
-        css: [ css/bootstrap-datepicker.css, bootstrap-datepicker.ru.min.js ]
+        css: [ css/bootstrap-datepicker.css, bootstrap-datepicker.ru.min.css ]
         js: js/bootstrap-datepicker.js
 
 bootstrap-daterangepicker:
