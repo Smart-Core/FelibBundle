@@ -60,7 +60,7 @@ class FelibExtension extends Extension
     protected function createCacheService(ContainerBuilder $container, string $cache_proviver_id): void
     {
         $definition = new Definition(
-            'SmartCore\\Bundle\\CMSBundle\\FelibBundle\\Cache\\CacheProvider', [
+            'SmartCore\\Bundle\\FelibBundle\\Cache\\CacheProvider', [
                 new Reference($cache_proviver_id),
             ]
         );
