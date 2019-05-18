@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('cache_provider')->defaultValue('smart_felib_cache_pool.filesystem')->end()
+                ->scalarNode('cache_provider')->defaultNull()->end() // smart_felib_cache_pool.filesystem
             ->end()
         ;
 

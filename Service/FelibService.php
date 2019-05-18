@@ -46,7 +46,7 @@ class FelibService
      * @param CacheProvider   $cache
      * @param bool            $isDebug
      */
-    public function __construct($cacheDir, RequestStack $requestStack, CacheProvider $cache, $isDebug = false)
+    public function __construct($cacheDir, RequestStack $requestStack, $cache, $isDebug = false)
     {
         $this->basePath     = $requestStack->getMasterRequest() ? $requestStack->getMasterRequest()->getBasePath() . '/' : '/';
         $this->globalAssets = $this->basePath . 'bundles/felib/';

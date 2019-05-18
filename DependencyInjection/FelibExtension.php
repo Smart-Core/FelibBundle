@@ -2,6 +2,8 @@
 
 namespace SmartCore\Bundle\FelibBundle\DependencyInjection;
 
+use SmartCore\Bundle\FelibBundle\Cache\CacheProvider;
+use SmartCore\Bundle\FelibBundle\Cache\DummyCacheProvider;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
@@ -30,7 +32,11 @@ class FelibExtension extends Extension
 
         $libs = Yaml::parse(file_get_contents(__DIR__.'/../Resources/config/libs.yml'));
 
-        $this->createCacheService($container, $config['cache_provider']);
+        if ($config['cache_provider']) {
+            $this->createCacheService($container, CacheProvider::class, $config['cache_provider']);
+        } else {
+            $this->createCacheService($container, DummyCacheProvider::class, $config['cache_provider']);
+        }
 
         foreach ($libs as $name => $lib) {
             if (!isset($lib['proirity'])) {
@@ -57,13 +63,15 @@ class FelibExtension extends Extension
      * @param ContainerBuilder $container
      * @param string           $cache_proviver_id
      */
-    protected function createCacheService(ContainerBuilder $container, string $cache_proviver_id): void
+    protected function createCacheService(ContainerBuilder $container, string $class, ?string $cache_proviver_id = null): void
     {
-        $definition = new Definition(
-            'SmartCore\\Bundle\\FelibBundle\\Cache\\CacheProvider', [
-                new Reference($cache_proviver_id),
-            ]
-        );
+        if ($cache_proviver_id) {
+            $arguments = [new Reference($cache_proviver_id)];
+        } else {
+            $arguments = [];
+        }
+
+        $definition = new Definition($class, $arguments);
 
         $definition->setPublic(true);
 
