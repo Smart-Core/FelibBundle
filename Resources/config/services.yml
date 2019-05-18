@@ -2,7 +2,7 @@ services:
     smart.felib:
         class: SmartCore\Bundle\FelibBundle\Service\FelibService
         public: true
-        arguments: [ "%kernel.cache_dir%", "@request_stack", "@cache.provider.smart_felib", "%kernel.debug%" ]
+        arguments: [ "%kernel.cache_dir%", "@request_stack", "@smart_core.felib.cache", "%kernel.debug%" ]
 
     smart.felib.twig.extension:
         class: SmartCore\Bundle\FelibBundle\Twig\FelibExtension

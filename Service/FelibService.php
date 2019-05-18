@@ -2,8 +2,9 @@
 
 namespace SmartCore\Bundle\FelibBundle\Service;
 
-use Cache\TagInterop\TaggableCacheItemPoolInterface;
+use SmartCore\Bundle\FelibBundle\Cache\CacheProvider;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class FelibService
 {
@@ -36,9 +37,7 @@ class FelibService
      */
     protected $globalAssets;
 
-    /**
-     * @var TaggableCacheItemPoolInterface
-     */
+    /** @var CacheProvider */
     protected $cache;
 
     /**
@@ -47,7 +46,7 @@ class FelibService
      * @param CacheProvider   $cache
      * @param bool            $isDebug
      */
-    public function __construct($cacheDir, RequestStack $requestStack, TaggableCacheItemPoolInterface $cache, $isDebug = false)
+    public function __construct($cacheDir, RequestStack $requestStack, CacheProvider $cache, $isDebug = false)
     {
         $this->basePath     = $requestStack->getMasterRequest() ? $requestStack->getMasterRequest()->getBasePath() . '/' : '/';
         $this->globalAssets = $this->basePath . 'bundles/felib/';
@@ -95,7 +94,7 @@ class FelibService
     {
         $cache_key = md5('smart_felib_called_libs' . serialize($this->calledLibs) . $this->basePath);
 
-        if (null == $output = $this->cache->getItem($cache_key)->get()) {
+        if (null == $output = $this->cache->get($cache_key)) {
             $output = [];
         } else {
             return $output;

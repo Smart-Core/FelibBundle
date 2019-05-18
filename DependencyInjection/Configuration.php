@@ -26,9 +26,12 @@ class Configuration implements ConfigurationInterface
             $rootNode = $treeBuilder->root('smart_core_felib');
         }
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->scalarNode('cache_provider')->defaultValue('smart_felib_cache_pool.filesystem')->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }
