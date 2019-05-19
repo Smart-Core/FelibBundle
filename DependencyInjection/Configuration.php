@@ -17,13 +17,13 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('smart_core_felib');
+        $treeBuilder = new TreeBuilder('felib');
 
         if (method_exists($treeBuilder, 'getRootNode')) {
             $rootNode = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('smart_core_felib');
+            $rootNode = $treeBuilder->root('felib');
         }
 
         $rootNode

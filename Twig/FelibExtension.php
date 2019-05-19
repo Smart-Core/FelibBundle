@@ -5,6 +5,7 @@ namespace SmartCore\Bundle\FelibBundle\Twig;
 use SmartCore\Bundle\FelibBundle\Service\FelibService;
 use SmartCore\Bundle\FelibBundle\Twig\TokenParser\FelibTokenParser;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 class FelibExtension extends AbstractExtension
 {
@@ -27,10 +28,10 @@ class FelibExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('felib_css',  [$this, 'getCss']),
-            new \Twig_SimpleFunction('felib_js',  [$this, 'getJs']),
-            new \Twig_SimpleFunction('felib_use',  [$this, 'call']),
-            new \Twig_SimpleFunction('felib_get_all',  [$this, 'getAll']),
+            new TwigFunction('felib_css',  [$this, 'getCss']),
+            new TwigFunction('felib_js',  [$this, 'getJs']),
+            new TwigFunction('felib_use',  [$this, 'call']),
+            new TwigFunction('felib_get_all',  [$this, 'getAll']),
         ];
     }
 

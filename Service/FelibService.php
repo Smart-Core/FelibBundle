@@ -213,11 +213,11 @@ class FelibService
             }
         }
 
-
-//        $this->cache->save($cache_key, $output);
-        $item = $this->cache->getItem($cache_key);
-        $item->set($output)->tag(['smart_felib']);
-        $this->cache->save($item);
+        if ($this->cache->getPool()) { // Проверка на наличие пулла для заглушки.
+            $item = $this->cache->getItem($cache_key);
+            $item->set($output)->tag(['smart_felib']);
+            $this->cache->save($item);
+        }
 
         return $output;
     }

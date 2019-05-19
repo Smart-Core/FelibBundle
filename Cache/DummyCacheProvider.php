@@ -26,7 +26,7 @@ class DummyCacheProvider
     /**
      * @return TagAwareAdapter
      */
-    public function getPool(): TagAwareAdapter
+    public function getPool()
     {
         return $this->pool;
     }
@@ -41,7 +41,7 @@ class DummyCacheProvider
      */
     public function set(string $key, $value, array $tags = [], $ttl = null)
     {
-
+        return new CacheItem();
     }
 
     /**
@@ -71,7 +71,7 @@ class DummyCacheProvider
      */
     public function getItem(string $key)
     {
-        return new CacheItem();;
+        return new CacheItem();
     }
 
     /**

@@ -73,7 +73,7 @@ class FelibExtension extends Extension
 
         $definition = new Definition($class, $arguments);
 
-        $definition->setPublic(true);
+        //$definition->setPublic(true);
 
         $container->setDefinition('smart_core.felib.cache',$definition);
     }
