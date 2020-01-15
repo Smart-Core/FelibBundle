@@ -73,6 +73,10 @@ font-awesome:
     profile:
         bootstrapcdn:
             css: //maxcdn.bootstrapcdn.com/font-awesome/
+    versions:
+        5: # 5.12.0
+            css: [ css/all.min.css ]
+            js:  [ js/fontawesome.min.js ]
 
 iefix:
     js: [ html5shiv.min.js, respond.min.js ]
