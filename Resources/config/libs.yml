@@ -8,8 +8,8 @@ angular:
         js: angular.js
 
 bootstrap:
-    version: 3
-    version_code: 3.3.7
+    version: 4
+    version_code: 4.4.1
     deps: jquery
     css: css/bootstrap.min.css
     js: js/bootstrap.min.js
