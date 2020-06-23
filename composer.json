@@ -5,10 +5,7 @@
     "homepage": "http://smart-core.org",
     "license": "MIT",
     "require": {
-        "php": ">=5.4.1",
-        "cache/adapter-bundle": "^1.0",
-        "cache/filesystem-adapter": "^1.0",
-        "oneup/flysystem-bundle": "^3.0"
+        "php": ">=5.4.1"
     },
     "autoload": {
         "psr-4": {
